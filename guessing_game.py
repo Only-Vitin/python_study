@@ -11,7 +11,7 @@ def jogar():
     pontos = None
 
     print("Escolha o nível de dificuldade", end="\n")
-    print("(1)Fácil  (2)Médio  (3)Difícil", end="\n")
+    print("(1) Fácil  (2) Médio  (3) Difícil", end="\n")
     nivel = int(input("- "))
     print("")
 
