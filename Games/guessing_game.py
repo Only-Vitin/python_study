@@ -65,6 +65,7 @@ def jogar():
         pontos = pontos - 100
 
     print("Fim de Jogo!")
+    print("O número era: ", numero_secreto)
     print("Sua pontuação final foi: {} pontos".format(pontos))
 
 if (__name__ == "__main__"):

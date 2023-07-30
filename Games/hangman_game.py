@@ -19,7 +19,6 @@ def jogar():
             index = index + 1
 
         print("Jogando...")
-
     print("Fim de Jogo")
     
 if (__name__ == "__main__"):
