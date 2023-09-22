@@ -16,25 +16,34 @@ def jogar():
     print("| ",' '.join(letras_acertadas), end="\n\n")
     while not enforcou and not acertou:
         chute = input("Qual letra? ")
+        chute = chute.strip().upper()
+        chute = unidecode(chute)
+        
+        enforcou = erros == 7
+        acertou = "_" not in letras_acertadas
         
         if len(chute) == 1:
-            chute = chute.strip().upper()
-            chute = unidecode(chute)
             if chute not in chutes:
                 chutes.append(chute)
 
-            if chute in unidecode(palavra_secreta):
-                marca_letras(palavra_secreta, chute, letras_acertadas)
+                if chute in unidecode(palavra_secreta):
+                    marca_letras(palavra_secreta, chute, letras_acertadas)
+                else:
+                    erros += 1
+                
+                printa_forca(erros, letras_acertadas, chutes)
             else:
-                erros += 1
-            
-            enforcou = erros == 7
-            acertou = "_" not in letras_acertadas
-            printa_forca(erros, letras_acertadas, chutes, palavra_secreta)
+                print("Você já chutou essa letra!")
         else:
-            print("Por favor digite apenas uma letra!")
-            continue
-
+            chute_palavra = chute
+            if chute_palavra == unidecode(palavra_secreta):
+                acertou = True
+            else:
+                print("Essa não é a palavra secreta")
+                erros += 1
+                printa_forca(erros, letras_acertadas, chutes)
+                continue
+            
     if(acertou):
         imprime_mensagem_vencedor()
     else:
@@ -47,12 +56,12 @@ def inicializacao():
     print("*** Você tem 7 tentativas ***", end="\n\n")
     
 def carrega_palavra_secreta():
-    arquivo = open("palavras.txt", "r")
-    palavras_secretas = arquivo.readlines()
-    palavra_secreta = palavras_secretas[randint(0, len(palavras_secretas)-1)]
-    palavra_secreta = palavra_secreta.upper().strip()
-    arquivo.close()
+    with open("palavras.txt", "r", encoding="utf-8") as arquivo:
+        palavras_secretas = arquivo.readlines()
+        palavra_secreta = palavras_secretas[randint(0, len(palavras_secretas)-1)]
+        palavra_secreta = palavra_secreta.upper().strip()
     return palavra_secreta
+
 
 def marca_letras(palavra_secreta, chute, letras_acertadas):
     index = 0
@@ -61,7 +70,7 @@ def marca_letras(palavra_secreta, chute, letras_acertadas):
             letras_acertadas[index] = letra
         index = index + 1
 
-def printa_forca(erros, letras_acertadas, chutes, palavra_secreta):
+def printa_forca(erros, letras_acertadas, chutes):
     if erros == 0:
         print(" ______\n|      |\n|      \n|      \n|      \n|")
         print("| ",' '.join(letras_acertadas), end="\n\n")
@@ -105,9 +114,9 @@ def imprime_mensagem_perdedor(palavra_secreta):
     print("    _______________         ")
     print("   /               \       ")
     print("  /                 \      ")
-    print("//                   \/\  ")
-    print("\|   XXXX     XXXX   | /   ")
-    print(" |   XXXX     XXXX   |/     ")
+    print(" /                   \  ")
+    print(" |   XXXX     XXXX   |    ")
+    print(" |   XXXX     XXXX   |     ")
     print(" |   XXX       XXX   |      ")
     print(" |                   |      ")
     print(" \__      XXX      __/     ")
