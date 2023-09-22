@@ -1,22 +1,24 @@
 from random import randint
+from typing import List
+
 from unidecode import unidecode
 
 
-def jogar():
+def jogar() -> None:
     inicializacao()
-    palavra_secreta = carrega_palavra_secreta()
+    palavra_secreta: str = carrega_palavra_secreta()
 
-    letras_acertadas = ["_"] * len(palavra_secreta)
-    chutes = []
+    letras_acertadas: List[str] = ["_"] * len(palavra_secreta)
+    chutes: List[str] = []
 
-    enforcou = False
-    acertou = False
-    erros = 0
+    enforcou: bool = False
+    acertou: bool = False
+    erros: int = 0
 
     print(" ______\n|      |\n|      \n|      \n|      \n|")
     print("| ", " ".join(letras_acertadas), end="\n\n")
     while not enforcou and not acertou:
-        chute = input("Qual letra? ")
+        chute: str = input("Qual letra? ")
         chute = chute.strip().upper()
         chute = unidecode(chute)
 
@@ -51,14 +53,14 @@ def jogar():
         imprime_mensagem_perdedor(palavra_secreta)
 
 
-def inicializacao():
+def inicializacao() -> None:
     print(" ___________________________", end="\n\n")
-    print("|    Boas vindas à Forca    |", end="\n")
-    print(" ___________________________", end="\n")
+    print("|    Boas vindas à Forca    |")
+    print(" ___________________________")
     print("*** Você tem 7 tentativas ***", end="\n\n")
 
 
-def carrega_palavra_secreta():
+def carrega_palavra_secreta() -> str:
     with open("palavras.txt", "r", encoding="utf-8") as arquivo:
         palavras_secretas = arquivo.readlines()
         palavra_secreta = palavras_secretas[randint(0, len(palavras_secretas) - 1)]
@@ -66,7 +68,7 @@ def carrega_palavra_secreta():
     return palavra_secreta
 
 
-def marca_letras(palavra_secreta, chute, letras_acertadas):
+def marca_letras(palavra_secreta, chute, letras_acertadas) -> None:
     index = 0
     for letra in palavra_secreta:
         if chute == unidecode(letra):
@@ -74,7 +76,7 @@ def marca_letras(palavra_secreta, chute, letras_acertadas):
         index = index + 1
 
 
-def printa_forca(erros, letras_acertadas, chutes):
+def printa_forca(erros, letras_acertadas, chutes) -> None:
     if erros == 0:
         print(" ______\n|      |\n|      \n|      \n|      \n|")
         print("| ", " ".join(letras_acertadas), end="\n\n")
@@ -100,7 +102,7 @@ def printa_forca(erros, letras_acertadas, chutes):
     print("Chutes: ", ", ".join(chutes), "\n")
 
 
-def imprime_mensagem_vencedor():
+def imprime_mensagem_vencedor() -> None:
     print("Parabéns, você ganhou!")
     print("       ___________      ")
     print("      '._==_==_=_.'     ")
@@ -114,7 +116,7 @@ def imprime_mensagem_vencedor():
     print("        '-------'       \n")
 
 
-def imprime_mensagem_perdedor(palavra_secreta):
+def imprime_mensagem_perdedor(palavra_secreta) -> None:
     print("Puxa, você foi enforcado!")
     print(f"A palavra era {palavra_secreta}")
     print("    _______________         ")

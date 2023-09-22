@@ -2,16 +2,16 @@ from registro import RegistroChegadaLog
 from registro import dias_da_semana
 
 
-def main():
+def main() -> None:
     registro_chegada_log = RegistroChegadaLog()
     while True:
-        operacao = input(
+        operacao: str = input(
             "Digite 'c' para registrar chegada, 'h' para histórico "
             "ou 'm' para médias: "
         )
 
         if operacao == "c":
-            usuario = input("Digite o nome do usuário: ")
+            usuario: str = input("Digite o nome do usuário: ")
             registro_chegada_log.adicionar_chegada(usuario)
             print(f"Registro de horário feito com sucesso - {usuario}\n")
 

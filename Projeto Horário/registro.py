@@ -1,7 +1,8 @@
 import re
 from datetime import datetime
+from typing import Tuple, Dict
 
-dias_da_semana = (
+dias_da_semana: Tuple[str] = (
     "Segunda-feira",
     "Terça-feira",
     "Quarta-feira",
@@ -13,31 +14,31 @@ dias_da_semana = (
 
 
 class RegistroChegada:
-    def __init__(self):
-        self.registro_tempo = self.obter_tempo_atual()
-        self.dia_da_semana = self.obter_dia_da_semana()
-        self.data = self.obter_data()
-        self.hora = self.obter_hora()
+    def __init__(self) -> None:
+        self.registro_tempo: datetime = self.obter_tempo_atual()
+        self.dia_da_semana: str = self.obter_dia_da_semana()
+        self.data: str = self.obter_data()
+        self.hora: str = self.obter_hora()
 
-    def obter_tempo_atual(self):
+    def obter_tempo_atual(self) -> datetime:
         return datetime.today()
 
-    def obter_dia_da_semana(self):
+    def obter_dia_da_semana(self) -> str:
         return dias_da_semana[self.registro_tempo.weekday()]
 
-    def obter_data(self):
+    def obter_data(self) -> str:
         return self.registro_tempo.strftime("%d/%m/%Y")
 
-    def obter_hora(self):
+    def obter_hora(self) -> str:
         return self.registro_tempo.strftime("%H:%M:%S")
 
 
 class RegistroChegadaLog:
-    def __init__(self):
+    def __init__(self) -> None:
         self.registro_semanal = {dia: [] for dia in dias_da_semana}
 
-    def __str__(self):
-        resultado = ""
+    def __str__(self) -> str:
+        resultado: str = ""
         for dia in dias_da_semana:
             resultado += (
                 f"{dia}:" f"{self.formatar_tempo(self.calcular_tempo_medio()[dia])}"
@@ -45,12 +46,12 @@ class RegistroChegadaLog:
         return resultado
 
     @staticmethod
-    def extrair_segundos(tempo_str):
+    def extrair_segundos(tempo_str) -> int:
         horas, minutos, segundos = map(int, tempo_str.split(":"))
         return horas * 3600 + minutos * 60 + segundos
 
     @staticmethod
-    def formatar_tempo(segundos):
+    def formatar_tempo(segundos) -> str:
         horas = int(segundos / 3600)
         segundos %= 3600
         minutos = int(segundos / 60)
@@ -58,18 +59,18 @@ class RegistroChegadaLog:
         segundos = int(segundos)
         return f"{horas:02d}:{minutos:02d}:{segundos:02d}"
 
-    def adicionar_chegada(self, usuario):
+    def adicionar_chegada(self, usuario) -> None:
         registro = RegistroChegada()
-        chegada_info = (
+        chegada_info: str = (
             "> Registrado por: "
             f"{usuario} -> Dia: {registro.dia_da_semana} -"
             f" {registro.data} às {registro.hora}"
         )
         self.registro_semanal[registro.dia_da_semana].insert(0, chegada_info)
 
-    def calcular_tempo_medio(self):
-        tempos_medios = {dia: 0 for dia in dias_da_semana}
-        contagem = {dia: 0 for dia in dias_da_semana}
+    def calcular_tempo_medio(self) -> Dict[str, int]:
+        tempos_medios: Dict[str, int] = {dia: 0 for dia in dias_da_semana}
+        contagem: Dict[str, int] = {dia: 0 for dia in dias_da_semana}
 
         for dia in dias_da_semana:
             for chegada in self.registro_semanal[dia]:

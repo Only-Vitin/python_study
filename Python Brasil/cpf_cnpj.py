@@ -19,26 +19,24 @@ class CpfCnpj:
         except AttributeError:
             return self.foramta_cnpj()
 
-    def valida_cpf(self, documento):
+    def valida_cpf(self, documento) -> bool:
         if len(documento) == 11:
             valida_cpf = CPF()
-            eh_valido = valida_cpf.validate(documento)
-            return eh_valido
+            return valida_cpf.validate(documento)
 
         return False
 
-    def foramta_cpf(self):
+    def foramta_cpf(self) -> str:
         mascara = CPF()
         return mascara.mask(self.cpf)
 
-    def valida_cnpj(self, documento):
+    def valida_cnpj(self, documento) -> bool:
         if len(documento) == 14:
             valida_cnpj = CNPJ()
-            eh_valido = valida_cnpj.validate(documento)
-            return eh_valido
+            return valida_cnpj.validate(documento)
 
         return False
 
-    def foramta_cnpj(self):
+    def foramta_cnpj(self) -> str:
         mascara = CNPJ()
         return mascara.mask(self.cnpj)
