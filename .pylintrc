@@ -2,4 +2,4 @@
 disable = C0114, C0115, C0116
 
 [MASTER]
-ignore-patterns=.gitignore
+ignore-patterns = .gitignore

@@ -1,6 +1,2 @@
 __pycache__/
 .vscode/
-.pylintrc
-.pre-commit-config.yaml
-.flake8
-.github
