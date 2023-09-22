@@ -3,7 +3,7 @@ from fila_base import FilaBase
 from constantes import CODIGO_NORMAL
 
 
-class filanormal(FilaBase):
+class FilaNormal(FilaBase):
     def __init__(self) -> None:
         super().__init__()
 
