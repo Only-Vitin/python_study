@@ -1,3 +1,5 @@
+from typing import Dict
+
 from registro import RegistroChegadaLog
 from registro import dias_da_semana
 
@@ -23,7 +25,7 @@ def main() -> None:
                 print("\n")
 
         elif operacao == "m":
-            medias = registro_chegada_log.calcular_tempo_medio()
+            medias: Dict[str, int] = registro_chegada_log.calcular_tempo_medio()
             print("\nMédias dos horários por dia da semana:\n")
             for dia in dias_da_semana:
                 print(f"{dia}: " f"{registro_chegada_log.formatar_tempo(medias[dia])}")

@@ -74,8 +74,8 @@ class RegistroChegadaLog:
 
         for dia in dias_da_semana:
             for chegada in self.registro_semanal[dia]:
-                tempo_str = re.search(r"\d{2}:\d{2}:\d{2}", chegada).group()
-                segundos = self.extrair_segundos(tempo_str)
+                tempo: str = re.search(r"\d{2}:\d{2}:\d{2}", chegada).group()
+                segundos: int = self.extrair_segundos(tempo)
                 tempos_medios[dia] += segundos
                 contagem[dia] += 1
 
