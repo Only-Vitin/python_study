@@ -1,21 +1,13 @@
 from registro import RegistroChegadaLog
-
-dias_da_semana = (
-    "Segunda-feira",
-    "Terça-feira",
-    "Quarta-feira",
-    "Quinta-feira",
-    "Sexta-feira",
-    "Sábado",
-    "Domingo",
-)
+from registro import dias_da_semana
 
 
 def main():
     registro_chegada_log = RegistroChegadaLog()
     while True:
         operacao = input(
-            "Digite 'c' para registrar chegada, 'h' para ver o histórico ou 'm' para calcular médias: "
+            "Digite 'c' para registrar chegada, 'h' para histórico "
+            "ou 'm' para médias: "
         )
 
         if operacao == "c":
@@ -34,7 +26,7 @@ def main():
             medias = registro_chegada_log.calcular_tempo_medio()
             print("\nMédias dos horários por dia da semana:\n")
             for dia in dias_da_semana:
-                print(f"{dia}: {registro_chegada_log.formatar_tempo(medias[dia])}")
+                print(f"{dia}: " f"{registro_chegada_log.formatar_tempo(medias[dia])}")
             print()
 
 

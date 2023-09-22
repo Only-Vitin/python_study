@@ -5,9 +5,6 @@ from constantes import CODIGO_PRIORITARIO
 
 
 class FilaPrioritaria(FilaBase):
-    def __init__(self) -> None:
-        super().__init__()
-
     def gera_senha_atual(self) -> None:
         self.senha_atual = f"{CODIGO_PRIORITARIO}{self.codigo}"
 

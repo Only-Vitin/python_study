@@ -1,5 +1,5 @@
 [MESSAGES CONTROL]
-disable = C0114, C0115, C0116
+disable = C0114, C0115, C0116, C0327, E0401
 
 [MASTER]
 ignore-patterns = .gitignore

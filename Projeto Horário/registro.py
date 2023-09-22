@@ -39,8 +39,8 @@ class RegistroChegadaLog:
     def __str__(self):
         resultado = ""
         for dia in dias_da_semana:
-            resultado += "{}: {}\n".format(
-                dia, self.formatar_tempo(self.calcular_tempo_medio()[dia])
+            resultado += (
+                f"{dia}:" f"{self.formatar_tempo(self.calcular_tempo_medio()[dia])}"
             )
         return resultado
 
@@ -59,11 +59,13 @@ class RegistroChegadaLog:
         return f"{horas:02d}:{minutos:02d}:{segundos:02d}"
 
     def adicionar_chegada(self, usuario):
-        registro_tempo = RegistroChegada()
-        registro_chegada_info = f">>> Registrado por: {usuario} -> Dia: {registro_tempo.dia_da_semana} - {registro_tempo.data} às {registro_tempo.hora}"
-        self.registro_semanal[registro_tempo.dia_da_semana].insert(
-            0, registro_chegada_info
+        registro = RegistroChegada()
+        chegada_info = (
+            "> Registrado por: "
+            f"{usuario} -> Dia: {registro.dia_da_semana} -"
+            f" {registro.data} às {registro.hora}"
         )
+        self.registro_semanal[registro.dia_da_semana].insert(0, chegada_info)
 
     def calcular_tempo_medio(self):
         tempos_medios = {dia: 0 for dia in dias_da_semana}

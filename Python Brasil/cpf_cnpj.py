@@ -11,7 +11,6 @@ class CpfCnpj:
             print(f"CNPJ Válido: {self.foramta_cnpj()}")
         else:
             print("O documento inserido é inválido")
-            exit()
 
     def __str__(self) -> str:
         try:
@@ -23,7 +22,10 @@ class CpfCnpj:
     def valida_cpf(self, documento):
         if len(documento) == 11:
             valida_cpf = CPF()
-            return valida_cpf.validate(documento)
+            eh_valido = valida_cpf.validate(documento)
+            return eh_valido
+
+        return False
 
     def foramta_cpf(self):
         mascara = CPF()
@@ -32,7 +34,10 @@ class CpfCnpj:
     def valida_cnpj(self, documento):
         if len(documento) == 14:
             valida_cnpj = CNPJ()
-            return valida_cnpj.validate(documento)
+            eh_valido = valida_cnpj.validate(documento)
+            return eh_valido
+
+        return False
 
     def foramta_cnpj(self):
         mascara = CNPJ()

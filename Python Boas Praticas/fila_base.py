@@ -1,4 +1,3 @@
-from colorama import Fore, Style
 from typing import List
 from abc import abstractmethod, ABCMeta
 
@@ -34,7 +33,7 @@ class FilaBase(metaclass=ABCMeta):
         try:
             cliente_atual: str = self.fila.pop(0)
             self.clientes_atendidos.append(cliente_atual)
-        except IndexError:
-            raise Exception(Fore.RED + "Não há mais clientes na fila" + Style.RESET_ALL)
+        except IndexError as exc:
+            raise ValueError("Não há mais clientes na fila") from exc
 
-        return f"Cliente atual: {Fore.GREEN + cliente_atual + Style.RESET_ALL}, dirija-se ao caixa: {Fore.GREEN + str(caixa) + Style.RESET_ALL}"
+        return f"Cliente atual: {cliente_atual}, dirija-se ao caixa: {str(caixa)}"
