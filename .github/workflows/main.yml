@@ -1,0 +1,11 @@
+jobs:
+  linting:
+    ...
+    steps:
+      - uses: "actions/checkout@v2"
+      - uses: "actions/setup-python@v2"
+      ...
+      -name: "Install and run pre-commit via tox"
+        run: |
+          python -m pip install --upgrade tox tox-gh-actions
+          python -m tox
