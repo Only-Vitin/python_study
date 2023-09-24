@@ -41,17 +41,15 @@ class RegistroChegadaLog:
         resultado: str = ""
         for dia in dias_da_semana:
             resultado += (
-                f"{dia}:" f"{self.formatar_tempo(self.calcular_tempo_medio()[dia])}"
+                f"{dia}:" f"{self.formatar_tempo(self.retorna_tempo_medio()[dia])}"
             )
         return resultado
 
-    @staticmethod
-    def extrair_segundos(tempo_str) -> int:
+    def extrair_segundos(self, tempo_str) -> int:
         horas, minutos, segundos = map(int, tempo_str.split(":"))
         return horas * 3600 + minutos * 60 + segundos
 
-    @staticmethod
-    def formatar_tempo(segundos) -> str:
+    def formatar_tempo(self, segundos) -> str:
         horas = int(segundos / 3600)
         segundos %= 3600
         minutos = int(segundos / 60)
@@ -68,10 +66,7 @@ class RegistroChegadaLog:
         )
         self.registro_semanal[registro.dia_da_semana].insert(0, chegada_info)
 
-    def calcular_tempo_medio(self) -> Dict[str, int]:
-        tempos_medios: Dict[str, int] = {dia: 0 for dia in dias_da_semana}
-        contagem: Dict[str, int] = {dia: 0 for dia in dias_da_semana}
-
+    def calcula_tempo_medio(self, tempos_medios, contagem):
         for dia in dias_da_semana:
             for chegada in self.registro_semanal[dia]:
                 tempo: str = re.search(r"\d{2}:\d{2}:\d{2}", chegada).group()
@@ -81,5 +76,11 @@ class RegistroChegadaLog:
 
             if contagem[dia] > 0:
                 tempos_medios[dia] /= contagem[dia]
+
+    def retorna_tempo_medio(self) -> Dict[str, int]:
+        tempos_medios: Dict[str, int] = {dia: 0 for dia in dias_da_semana}
+        contagem: Dict[str, int] = {dia: 0 for dia in dias_da_semana}
+
+        self.calcula_tempo_medio(tempos_medios, contagem)
 
         return tempos_medios
