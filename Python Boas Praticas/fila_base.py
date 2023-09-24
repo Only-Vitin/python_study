@@ -1,10 +1,11 @@
-from typing import List
+from typing import List, Dict, Union
 from abc import abstractmethod, ABCMeta
 
 from constantes import TAMANHO_CODIGO_MAXIMO, TAMANHO_CODIGO_MINIMO
 
 
 class FilaBase(metaclass=ABCMeta):
+    
     def __init__(self) -> None:
         self.codigo: int = 0
         self.senha_atual: str = ""
@@ -37,3 +38,17 @@ class FilaBase(metaclass=ABCMeta):
             raise ValueError("Não há mais clientes na fila") from exc
 
         return f"Cliente atual: {cliente_atual}, dirija-se ao caixa: {str(caixa)}"
+
+    def estatistica(self, dia: str, agencia: str, flag: str) -> dict:
+        estatistica: Dict[str, Union[str, int, List[str]]] = {}
+        if flag != "detail":
+            estatistica[f"{agencia} - {dia}"] = len(self.clientes_atendidos)
+        else:
+            estatistica["Dia"] = dia
+            estatistica["Agencia"] = agencia
+            estatistica["Clientes atendidos"] = self.clientes_atendidos
+            estatistica["Quantidade de clientes atendidos"] = len(
+                self.clientes_atendidos
+            )
+
+        return estatistica
