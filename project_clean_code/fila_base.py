@@ -5,7 +5,7 @@ from constantes import TAMANHO_CODIGO_MAXIMO, TAMANHO_CODIGO_MINIMO
 
 
 class FilaBase(metaclass=ABCMeta):
-    
+
     def __init__(self) -> None:
         self.codigo: int = 0
         self.senha_atual: str = ""
