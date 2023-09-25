@@ -61,7 +61,7 @@ def inicializacao() -> None:
 
 
 def carrega_palavra_secreta() -> str:
-    with open("words.txt", "r", encoding="utf-8") as arquivo:
+    with open("_words.txt", "r", encoding="utf-8") as arquivo:
         palavras_secretas = arquivo.readlines()
         palavra_secreta = palavras_secretas[randint(0, len(palavras_secretas) - 1)]
         palavra_secreta = palavra_secreta.upper().strip()

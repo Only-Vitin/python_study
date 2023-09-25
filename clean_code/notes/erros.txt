@@ -1,0 +1,74 @@
+Pylint:
+https://github.com/britonad/pylint-errors#list-of-errors
+
+C0103 (invalid-name): Usar nomes de variáveis ou funções que não seguem as convenções de nomenclatura PEP 8, como usar letras maiúsculas ou caracteres não-alfabéticos.
+C0114 (missing-module-docstring): Não fornecer uma docstring para um módulo.
+C0115 (missing-class-docstring): Não fornecer uma docstring para uma classe.
+C0116 (missing-function-docstring): Não fornecer uma docstring para uma função.
+C0301 (line-too-long): Ter linhas de código que excedem o limite de caracteres recomendado (geralmente 79 ou 80 caracteres).
+E0401 (import-error): Importar um módulo que não pode ser encontrado no caminho de importação.
+E0601 (used-before-assignment): Usar uma variável antes de atribuir um valor a ela.
+E0611 (no-name-in-module): Importar um módulo que não existe ou cujo nome está incorreto.
+E0702 (raising-bad-type): Levantar um tipo de exceção não padrão ou não existente.
+E0711 (notimplemented-raised): Levantar uma exceção NotImplemented sem implementar o método.
+E1101 (no-member): Esquecer de acessar membros de uma classe ou objeto corretamente. Isso ocorre quando você tenta acessar um atributo ou método que não existe.
+E1120 (no-value-for-parameter): Chamar uma função sem fornecer argumentos necessários.
+W0101 (unreachable): Ter código inacessível, como após um comando return, break ou continue.
+W0106 (expression-not-assigned): Realizar uma operação ou expressão sem atribuir seu resultado a uma variável.
+W0212 (protected-access): Acessar membros de classe protegidos (iniciando com _) fora da classe.
+W0401 (wildcard-import): Importar módulos usando import *, o que pode tornar o código menos legível.
+W0611 (unused-import): Importar um módulo que não é usado no código.
+W0612 (unused-variable): Declarar variáveis que não são usadas no código.
+W0613 (unused-argument): Declarar argumentos em uma função que não são usados dentro da função.
+
+
+
+Flake8:
+
+E101: A indentação contém espaços e tabs misturados.
+E111: A indentação não é um múltiplo de quatro.
+E112: Esperava um bloco indentado.
+E113: Indentação inesperada.
+E201: Espaço em branco após um caractere.
+E202: Espaço em branco antes de um caractere.
+E203: Espaço em branco antes de um caractere.
+E211: Espaço em branco antes do texto.
+E223: Tabulação / espaços múltiplos antes do operador.
+E224: Tabulação / espaços múltiplos após o operador.
+E225: Espaço em branco ausente ao redor do operador.
+E231: Espaço em branco ausente após um caractere.
+E241: Espaços múltiplos após o separador.
+E242: Tabulação após o separador.
+E251: Sem espaços em torno da palavra-chave/parâmetro igual.
+E262: Comentário em linha deve começar com ‘# ’.
+E301: Esperava 1 linha em branco, encontrou 0.
+E302: Esperava 2 linhas em branco, encontrou <n>.
+E303: Muitas linhas em branco (<n>).
+E304: Linhas em branco encontradas após o decorador de função.
+E401: Múltiplas importações em uma única linha.
+E501: Linha muito longa (<n> caracteres).
+E701: Múltiplas declarações em uma única linha (dois pontos).
+E702: Múltiplas declarações em uma única linha (ponto e vírgula).
+W191: A indentação contém tabulações.
+W291: Espaço em branco no final da linha.
+W292: Sem quebra de linha no final do arquivo.
+W293: A linha em branco contém espaços em branco.
+W391: Linha em branco no final do arquivo.
+W601: .has_key() está obsoleto, use 'in'.
+W602: Forma obsoleta de gerar exceção.
+W603: ‘<>’ está obsoleto, use ‘!=’.
+W604: Backticks são obsoletos, use ‘repr()’.
+
+Pyflakes:
+
+W402: <module> importado, mas não usado.
+W403: Importar <module> na linha <n> está oculto por variável de loop.
+W404: 'from <module> import *' usado; impossível detectar nomes não definidos.
+W405: Importação(s) futura(s) <name> após outras declarações.
+W801: Redefinição de <name> não usado da linha <n>.
+W802: Nome <name> não definido.
+W803: Nome <name> indefinido em all.
+W804: Variável local <name> (definida no escopo de fechamento na linha <n>) referenciada antes da atribuição.
+W805: Argumento duplicado <name> na definição da função.
+W806: Redefinição da função <name> da linha <n>.
+W807: Variável local <name> é atribuída, mas nunca usada.

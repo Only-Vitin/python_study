@@ -1,0 +1,62 @@
+
+Exception: Esta é a classe base para todas as exceções em Python. 
+Você pode usá-la para capturar qualquer exceção, mas é recomendável ser mais específico ao capturar exceções, 
+para que você possa tratar cada tipo de erro de maneira adequada.
+
+ZeroDivisionError: Essa exceção é gerada quando você tenta dividir um número por zero. 
+É importante evitar divisões por zero em seus programas, pois isso resultará em um erro.
+
+ValueError: Essa exceção ocorre quando uma função recebe um argumento com o tipo de dado correto, 
+mas com um valor inapropriado para a operação que está sendo executada. Por exemplo, 
+tentar converter a string "abc" em um número inteiro gerará um ValueError.
+
+TypeError: Essa exceção é gerada quando uma operação é realizada em um tipo de dados incompatível. 
+Por exemplo, tentar somar uma string e um número resultará em um TypeError.
+
+FileNotFoundError: Essa exceção ocorre quando você tenta abrir ou manipular um arquivo que não existe no sistema de arquivos. 
+É importante garantir que o arquivo exista antes de tentar acessá-lo.
+
+IndexError: Essa exceção é gerada ao tentar acessar um índice inválido em uma lista, tupla ou sequência semelhante. 
+Por exemplo, tentar acessar o décimo elemento de uma lista que tem apenas cinco elementos resultará em um IndexError.
+
+KeyError: Essa exceção é gerada ao tentar acessar uma chave que não existe em um dicionário. 
+Certifique-se sempre de que a chave que você está tentando acessar exista no dicionário antes de acessá-la.
+
+IOError: Essa exceção ocorre ao enfrentar problemas relacionados a operações de entrada/saída, como leitura ou gravação de arquivos. 
+Pode ser causada por várias razões, como permissões insuficientes ou falta do arquivo.
+
+####################################
+
+AttributeError: Gerado quando você tenta acessar um atributo que não existe em um objeto.
+
+NameError: Ocorre quando um nome ou variável não é encontrado no escopo atual.
+
+TypeError: Pode ocorrer em diferentes contextos, 
+como tentar chamar uma função que não é chamável ou usar uma operação em tipos incompatíveis.
+
+SyntaxError: Indica que há um erro na sintaxe do seu código Python.
+
+IndentationError: Geralmente ocorre quando a indentação (espaços ou tabulações) em seu código não está correta.
+
+OverflowError e MemoryError: O primeiro ocorre quando um cálculo numérico resulta em um valor que é muito grande para ser representado, 
+e o segundo ocorre quando não há memória suficiente para alocar um objeto.
+
+ImportError: Gerado quando há problemas ao importar módulos ou pacotes.
+
+StopIteration: Usado em iterações para indicar que não há mais itens para serem iterados.
+
+KeyboardInterrupt: Ocorre quando o usuário interrompe a execução do programa pressionando Ctrl+C no terminal.
+
+SystemExit: Indica que o programa deve ser encerrado imediatamente, 
+geralmente gerado pelo sistema ou pelo desenvolvedor.
+
+ArithmeticError: Classe base para exceções relacionadas a operações aritméticas. 
+Inclui exceções como OverflowError, ZeroDivisionError, entre outras.
+
+AssertionError: Gerado quando uma instrução assert falha.
+
+FileExistsError e FileExistsError: Exceções relacionadas a operações de arquivo, 
+indicando que um arquivo já existe ou não existe, respectivamente.
+
+ConnectionError e suas subclasses (por exemplo, TimeoutError): Usado para lidar com exceções relacionadas 
+a problemas de conexão em operações de rede.
