@@ -30,7 +30,7 @@ def main() -> None:
             for dia in dias_da_semana:
                 print(f"{dia}: " f"{registro_chegada_log.formatar_tempo(medias[dia])}")
             print()
-        
+
 
 if __name__ == "__main__":
     main()
