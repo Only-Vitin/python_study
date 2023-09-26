@@ -7,9 +7,7 @@ dias_da_semana: Tuple[str] = (
     "Terça-feira",
     "Quarta-feira",
     "Quinta-feira",
-    "Sexta-feira",
-    "Sábado",
-    "Domingo",
+    "Sexta-feira"
 )
 
 
