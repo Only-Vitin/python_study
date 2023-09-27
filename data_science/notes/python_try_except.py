@@ -1,3 +1,7 @@
+'''
+Anotações sobre os comandos try/except
+'''
+
 try:
     ...
     #Código a ser executado, caso tenha uma exceção para imediatamente
