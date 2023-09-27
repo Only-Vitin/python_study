@@ -1,15 +1,16 @@
-import re
+import csv
+import pandas as pd
+from matplotlib import pyplot as plt
 from datetime import datetime
-from typing import Tuple, Dict
+from constantes import caminho_arquivo
 
-dias_da_semana: Tuple[str] = (
+dias_da_semana = (
     "Segunda-feira",
     "Terça-feira",
     "Quarta-feira",
     "Quinta-feira",
     "Sexta-feira"
 )
-
 
 class RegistroChegada:
     def __init__(self) -> None:
@@ -25,12 +26,13 @@ class RegistroChegada:
         return dias_da_semana[self.registro_tempo.weekday()]
 
     def obter_data(self) -> str:
-        return self.registro_tempo.strftime("%d/%m/%Y")
+        data = self.registro_tempo.strftime('%d/%m/%Y')
+        return data
 
     def obter_hora(self) -> str:
-        return self.registro_tempo.strftime("%H:%M:%S")
-
-
+        hora = self.registro_tempo.strftime("%H:%M:%S")
+        return hora
+    
 class RegistroChegadaLog:
     def __init__(self) -> None:
         self.registro_semanal = {dia: [] for dia in dias_da_semana}
@@ -42,43 +44,50 @@ class RegistroChegadaLog:
                 f"{dia}:" f"{self.formatar_tempo(self.retorna_tempo_medio()[dia])}"
             )
         return resultado
-
-    def extrair_segundos(self, tempo_str) -> int:
-        horas, minutos, segundos = map(int, tempo_str.split(":"))
-        return horas * 3600 + minutos * 60 + segundos
-
-    def formatar_tempo(self, segundos) -> str:
-        horas = int(segundos / 3600)
-        segundos %= 3600
-        minutos = int(segundos / 60)
-        segundos %= 60
-        segundos = int(segundos)
-        return f"{horas:02d}:{minutos:02d}:{segundos:02d}"
-
+    
     def adicionar_chegada(self, usuario) -> None:
         registro = RegistroChegada()
         chegada_info: str = (
-            "> Registrado por: "
-            f"{usuario} -> Dia: {registro.dia_da_semana} -"
-            f" {registro.data} às {registro.hora}"
+            f"{registro.dia_da_semana},{registro.data},{registro.hora},{usuario}"
         )
-        self.registro_semanal[registro.dia_da_semana].insert(0, chegada_info)
+        with open(caminho_arquivo, mode="a", newline="") as arquivo_csv:
+            escritor_csv = csv.writer(arquivo_csv, delimiter=' ', quoting=csv.QUOTE_MINIMAL, quotechar='|')
+            escritor_csv.writerow([chegada_info])
 
-    def calcula_tempo_medio(self, tempos_medios, contagem):
-        for dia in dias_da_semana:
-            for chegada in self.registro_semanal[dia]:
-                tempo: str = re.search(r"\d{2}:\d{2}:\d{2}", chegada).group()
-                segundos: int = self.extrair_segundos(tempo)
-                tempos_medios[dia] += segundos
-                contagem[dia] += 1
+    def historico_dia(self, parametro: str):
+        df = pd.read_csv(caminho_arquivo)
+        if parametro == 'todos':
+            return df
+        else:
+            self.par = parametro
+            resultado = df.query('Dias == @self.par')
+            return resultado
+    
+    def retorna_media(self):
+        df = pd.read_csv(caminho_arquivo)
+        df["Hora"] = pd.to_datetime(df["Hora"], format="%H:%M:%S")
+        media = df.groupby("Dias")[["Hora"]].mean()
+        media["Hora"] = media["Hora"].apply(lambda x: x.strftime("%H:%M:%S"))
+        media.rename(columns={"Hora": "Medias"}, inplace=True)
+        media.reset_index(inplace=True)
 
-            if contagem[dia] > 0:
-                tempos_medios[dia] /= contagem[dia]
+        ordem_semana = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira']
+        media['Dias'] = pd.Categorical(media['Dias'], categories=ordem_semana, ordered=True)
+        media = media.sort_values('Dias')
 
-    def retorna_tempo_medio(self) -> Dict[str, int]:
-        tempos_medios: Dict[str, int] = {dia: 0 for dia in dias_da_semana}
-        contagem: Dict[str, int] = {dia: 0 for dia in dias_da_semana}
+        return media
+    
+    def mostra_grafico(self):
+        media = self.retorna_media()
+        media["Medias"] = pd.to_datetime(media["Medias"], format="%H:%M:%S")
+        media.plot(x='Dias', y='Medias', kind='line', figsize=(9, 5), color="purple", fontsize=10)
 
-        self.calcula_tempo_medio(tempos_medios, contagem)
+        fig_manager = plt.get_current_fig_manager()
+        if fig_manager.window:
+            fig_manager.window.wm_geometry("+%d+%d" % (400, 150))
 
-        return tempos_medios
+        plt.title(f"Média dos horários: ", fontsize=14, fontweight='bold')
+        plt.subplots_adjust(left=0.278, right=0.96, bottom=0.126, top=0.910)
+        plt.xlabel('Dias da semana')
+        plt.ylabel('Horários')
+        plt.show()

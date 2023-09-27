@@ -1,0 +1,1 @@
+caminho_arquivo = r'C:\Users\Projeto Trainee\Documents\Python Study\my_test_projects\arrival_registration\horarios_chegada.csv'
