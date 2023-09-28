@@ -1,6 +1,6 @@
 from tabela_de_dados import TabelaDados
 
-URL = (
+URL: str = (
     "https://raw.githubusercontent.com/"
     "alura-cursos/pandas-conhecendo-a-biblioteca/"
     "main/base-de-dados/aluguel.csv"

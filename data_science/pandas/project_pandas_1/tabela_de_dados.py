@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 import pandas as pd
 from pandas.core.frame import DataFrame
@@ -9,8 +9,8 @@ from constantes import imoveis_comerciais
 
 class TabelaDados:
     def __init__(self, url) -> None:
-        self.par = None
-        self.dados = self.define_dados(url)
+        self.par: str = None
+        self.dados: DataFrame = self.define_dados(url)
         self.imoveis_comerciais: List[str] = imoveis_comerciais
         self.dados_res: DataFrame = self.dados.query(
             "@self.imoveis_comerciais not in Tipo"
@@ -27,16 +27,17 @@ class TabelaDados:
 
     def _processar_dados(self, dados: DataFrame, flag: str) -> DataFrame:
         if flag == "residencial":
-            dados_filtrados = dados.query("@self.imoveis_comerciais not in Tipo")
+            dados_filtrados: DataFrame = dados.query(
+                "@self.imoveis_comerciais not in Tipo"
+            )
         elif flag == "comercial":
-            dados_filtrados = dados.query("@self.imoveis_comerciais in Tipo")
+            dados_filtrados: DataFrame = dados.query("@self.imoveis_comerciais in Tipo")
         elif flag == "geral":
-            dados_filtrados = dados
+            dados_filtrados: DataFrame = dados
         else:
             raise ValueError(
                 "Essa flag não existe, somente 'residencial', 'comercial' e 'geral'"
             )
-
         return dados_filtrados
 
     def get_grafico_media(self, flag: str) -> None:
@@ -85,9 +86,9 @@ class TabelaDados:
         plt.ylabel("Percentual")
         plt.show()
 
-    def get_informacoes(self, flag: str):
+    def get_informacoes(self, flag: str) -> str:
         dados_filtrados = self._processar_dados(self.dados, flag)
-        infos = {}
+        infos: Dict[str, DataFrame] = {}
         infos["CINCO PRIMEIRAS LINHAS"] = dados_filtrados.head(5)
         infos["CINCO ULTIMAS LINHAS"] = dados_filtrados.tail(5)
         infos["DESCRIÇÕES GERAIS"] = dados_filtrados.describe()
