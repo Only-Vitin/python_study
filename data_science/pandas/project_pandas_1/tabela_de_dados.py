@@ -1,7 +1,9 @@
 from typing import List
+
 import pandas as pd
 from pandas.core.frame import DataFrame
 from matplotlib import pyplot as plt
+
 from constantes import imoveis_comerciais
 
 

@@ -1,11 +1,13 @@
 from registro import RegistroChegadaLog
 
+
 def exibir_ajuda():
     print("Opções disponíveis:")
     print("  'c' - Registrar chegada")
     print("  'h' - Histórico de chegadas")
     print("  'm' - Médias dos horários")
     print("  'g' - Gerar gráfico")
+
 
 def main():
     registro_chegada_log = RegistroChegadaLog()
@@ -19,7 +21,7 @@ def main():
             print(f"Registro de horário feito com sucesso - {usuario}\n")
 
         elif operacao == "h":
-            dia = input('Qual dia você deseja ver ? ')
+            dia = input("Qual dia você deseja ver ? ")
             print(registro_chegada_log.historico_dia(dia))
 
         elif operacao == "m":
@@ -33,6 +35,7 @@ def main():
 
         else:
             print("Operação inválida. Digite 'h' para ajuda.")
+
 
 if __name__ == "__main__":
     main()
