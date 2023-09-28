@@ -9,7 +9,7 @@ URL = (
 dados_imobiliaria = TabelaDados(URL)
 
 print(dados_imobiliaria)
-dados_imobiliaria.get_grafico_media('residencial')
-dados_imobiliaria.get_grafico_percentual('residencial')
+dados_imobiliaria.get_grafico_media("residencial")
+dados_imobiliaria.get_grafico_percentual("residencial")
 # print(dados_imobiliaria.get_informacoes('geral'))
 # print(dados_imobiliaria.busca_parametro('Flamengo', 'Bairro'))
