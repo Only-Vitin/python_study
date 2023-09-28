@@ -1,7 +1,7 @@
 from registro import RegistroChegadaLog
 
 
-def exibir_ajuda():
+def exibir_ajuda() -> None:
     print("Opções disponíveis:")
     print("  'c' - Registrar chegada")
     print("  'h' - Histórico de chegadas")
@@ -9,11 +9,11 @@ def exibir_ajuda():
     print("  'g' - Gerar gráfico")
 
 
-def main():
+def main() -> None:
     registro_chegada_log = RegistroChegadaLog()
 
     while True:
-        operacao = input("Digite a operação desejada ('help' para ajuda): ")
+        operacao: str = input("Digite a operação desejada ('help' para ajuda): ")
 
         if operacao == "c":
             usuario = input("Digite o nome do usuário: ")
