@@ -16,7 +16,7 @@ dias_da_semana: Tuple[str] = (
 )
 
 caminho_arquivo: str = os.path.join(
-    "my_test_projects", "arrival_registration", "horarios_chegada.csv"
+    "my_test_projects", "arrival_registration", "_horarios_chegada.csv"
 )
 
 
@@ -93,17 +93,30 @@ class RegistroChegadaLog:
             x="Dias",
             y="Medias",
             kind="line",
-            figsize=(9, 5),
-            color="purple",
+            figsize=(10, 6),
+            color="red",
             fontsize=10,
+            marker="o"
         )
 
         fig_manager = plt.get_current_fig_manager()
         if fig_manager.window:
-            fig_manager.window.wm_geometry(f"+{400}+{150}")
+            fig_manager.window.wm_geometry(f"+{500}+{100}")
 
         plt.title("Média dos horários: ", fontsize=14, fontweight="bold")
-        plt.subplots_adjust(left=0.278, right=0.96, bottom=0.126, top=0.910)
+        plt.subplots_adjust(left=0.1, right=0.96, bottom=0.213, top=0.910)
         plt.xlabel("Dias da semana")
         plt.ylabel("Horários")
+
+        plt.xticks(rotation=45)
+        y_index = ['23:10', '23:11', '23:12', '23:13', '23:14', '23:15']
+        yn_index = pd.to_datetime(y_index, format="%H:%M")
+        plt.yticks(yn_index, y_index)
+
         plt.show()
+
+    def remove_linha(self, data: str):
+        df = pd.read_csv(caminho_arquivo)
+        filtro = df['Data'] == data
+        df_filtrado = df[~filtro]
+        df_filtrado.to_csv(caminho_arquivo, index=False)
