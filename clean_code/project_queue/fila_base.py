@@ -1,7 +1,7 @@
 from typing import List, Dict, Union
 from abc import abstractmethod, ABCMeta
 
-from constantes import TAMANHO_CODIGO_MAXIMO, TAMANHO_CODIGO_MINIMO
+from _constantes import TAMANHO_CODIGO_MAXIMO, TAMANHO_CODIGO_MINIMO
 
 
 class FilaBase(metaclass=ABCMeta):
