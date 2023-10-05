@@ -1,8 +1,8 @@
-#MySQL Config
-host = 'localhost'
-user = 'root'
-passw = 'ecjk0102'
-db = 'estoque_de_leite'
+# MySQL Config
+HOST = "localhost"
+USER = "root"
+PASSWD = "ecjk0102"
+DB = "estoque_de_leite"
 
 ###
-tabela_cadastro = 'cadastro'
+TABELA_CADASTRO = "cadastro"
