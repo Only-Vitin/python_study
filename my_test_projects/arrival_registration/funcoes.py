@@ -49,3 +49,4 @@ def opera(operacao:str):
 
     else:
         print("Operação inválida. Digite 'h' para ajuda.")
+        
